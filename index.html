@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Georgia Tech Faculty Awards Guide</title>
+<meta name="description" content="Internal faculty awards at Georgia Tech, organized by category with eligibility, nomination packets, sponsors and links.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23003057'/%3E%3Cpath d='M16 5l3.2 6.6 7.3 1-5.3 5.1 1.3 7.2L16 21.5l-6.5 3.4 1.3-7.2-5.3-5.1 7.3-1z' fill='%23b3a369'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: a navy masthead, a sticky filter rail, then category sections of equal-height cards. */
+:root {
+  --bg: #f7f6f2;
+  --surface: #ffffff;
+  --surface-2: #efede6;
+  --fg: #1d2330;
+  --muted: #5d6572;
+  --line: #d9d5c9;
+  --navy: #003057;
+  --navy-ink: #ffffff;
+  --gold: #b3a369;
+  --gold-soft: #eee8d2;
+  --gold-ink: #6b5e2a;
+  --accent: #00537e;
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(29,35,48,.06), 0 6px 18px rgba(29,35,48,.06);
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11161f; --surface: #1a2130; --surface-2: #222b3c; --fg: #e8e9ec; --muted: #a2a9b6;
+    --line: #2d3748; --navy: #0b2a4a; --navy-ink: #f1f4f8; --gold: #c9b878; --gold-soft: #3a3523;
+    --gold-ink: #e3d8a8; --accent: #7cc4ef; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11161f; --surface: #1a2130; --surface-2: #222b3c; --fg: #e8e9ec; --muted: #a2a9b6;
+  --line: #2d3748; --navy: #0b2a4a; --navy-ink: #f1f4f8; --gold: #c9b878; --gold-soft: #3a3523;
+  --gold-ink: #e3d8a8; --accent: #7cc4ef; --shadow: 0 1px 2px rgba(0,0,0,.4), 0 6px 18px rgba(0,0,0,.35);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 15px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+.wrap {
+  max-width: 1180px; margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* Masthead */
+.mast { background: var(--navy); color: var(--navy-ink); border-bottom: 4px solid var(--gold); }
+.mast .wrap { padding-block: 40px 34px; display: grid; gap: 18px; }
+.eyebrow {
+  font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;
+  color: var(--gold);
+}
+.mast h1 { font-size: clamp(30px, 4.2vw, 46px); font-weight: 600; line-height: 1.1; }
+.mast p.lede { max-width: 62ch; margin: 0; font-size: 16px; opacity: .9; }
+.stats { display: flex; flex-wrap: wrap; gap: 10px 26px; font-size: 14px; opacity: .92; }
+.stats b { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--gold); margin-right: 6px; font-variant-numeric: tabular-nums; }
+
+/* Filter rail */
+.rail {
+  position: sticky; top: 0; z-index: 20;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+.rail .wrap { padding-block: 12px; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.search { flex: 1 1 220px; min-width: 0; position: relative; }
+.search input {
+  width: 100%; padding: 9px 12px 9px 36px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--bg); color: var(--fg); font: inherit; font-size: 14px;
+}
+.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--muted); }
+.search input:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  border: 1px solid var(--line); background: var(--surface); color: var(--fg);
+  padding: 6px 12px; border-radius: 999px; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer;
+}
+.chip:hover { border-color: var(--gold); }
+.chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
+.chip[aria-pressed="true"] { background: var(--navy); color: var(--navy-ink); border-color: var(--navy); }
+.chip .n { opacity: .65; margin-left: 4px; font-variant-numeric: tabular-nums; }
+.rail label.sel { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }.rail select { font: inherit; font-size: 13px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); }
+
+/* Category nav */
+.catnav .wrap { padding-block: 22px 6px; display: flex; flex-wrap: wrap; gap: 8px; }
+.catnav a {
+  text-decoration: none; color: var(--fg); background: var(--surface-2); border-radius: 8px;
+  padding: 8px 12px; font-size: 13px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px;
+}
+.catnav a .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+.catnav a:hover { background: var(--gold-soft); }
+
+/* Sections */
+main .wrap { padding-block: 10px 60px; display: grid; gap: 44px; }
+section.cat { scroll-margin-top: 90px; }
+section.cat[hidden] { display: none; }
+.cat-head { display: grid; grid-template-columns: 6px 1fr; gap: 16px; margin-bottom: 18px; }
+.cat-head .bar { background: var(--c); border-radius: 3px; }
+.cat-head h2 { font-size: 26px; font-weight: 600; line-height: 1.2; }
+.cat-head p { margin: 4px 0 0; color: var(--muted); max-width: 70ch; }
+.cat-head .count { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; margin-left: 10px; font-family: var(--font-body); font-weight: 500; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: var(--shadow); display: flex; flex-direction: column; min-width: 0;
+  border-top: 3px solid var(--c);
+}
+.card[hidden] { display: none; }
+.card .body { padding: 16px 18px 14px; display: grid; gap: 10px; flex: 1; align-content: start; }
+.card h3 { font-size: 18px; font-weight: 600; line-height: 1.25; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 6px; background: var(--surface-2); color: var(--muted);
+}
+.tag.inst { background: var(--gold-soft); color: var(--gold-ink); }
+.card p.desc { margin: 0; font-size: 14px; color: var(--fg); }
+.meta { display: grid; gap: 7px; font-size: 13px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 10px; }
+.meta div { display: grid; grid-template-columns: 86px 1fr; gap: 8px; }
+.meta dt { font-weight: 600; color: var(--fg); margin: 0; }
+.meta dd { margin: 0; min-width: 0; }
+.winners { list-style: none; margin: 0; padding: 0; display: grid; gap: 3px; }
+.winners li { display: grid; grid-template-columns: 38px 1fr; gap: 6px; color: var(--fg); }
+.winners .yr { font-weight: 600; color: var(--gold-ink); font-variant-numeric: tabular-nums; }
+.winners li.note { grid-template-columns: 1fr; color: var(--muted); font-style: italic; }
+.card .foot { padding: 10px 18px 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 13px; }
+.card .foot .sponsor { color: var(--muted); min-width: 0; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+  text-decoration: none; font-weight: 600; font-size: 13px; color: var(--accent);
+}
+.btn svg { width: 14px; height: 14px; }
+.empty { text-align: center; color: var(--muted); padding: 60px 0; font-size: 15px; }
+.empty[hidden] { display: none; }
+
+footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+footer .wrap { padding-block: 22px 40px; display: grid; gap: 6px; }
+
+@media (max-width: 640px) {
+  .meta div { grid-template-columns: 1fr; gap: 2px; }
+  .mast .wrap { padding-block: 30px 26px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .card { transition: transform .15s ease, box-shadow .15s ease; }
+  .card:hover { transform: translateY(-2px); }
+}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <h1>Faculty Awards Guide</h1>
+    <p class="lede">Internal awards available to Georgia Tech faculty, grouped by what they recognize. Each card shows who is eligible, what a nomination packet needs, who sponsors it, and where it is presented.</p>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+
+<div class="rail" role="search">
+  <div class="wrap">
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search awards, criteria, sponsors…" aria-label="Search awards">
+    </div>
+    <div class="chips" id="levelChips" aria-label="Award level">
+      <button class="chip" data-level="all" aria-pressed="true">All levels</button>
+      <button class="chip" data-level="institute" aria-pressed="false">Institute-level</button>
+      <button class="chip" data-level="unit" aria-pressed="false">College / Unit</button>
+    </div>
+    <label class="sel">Sponsor
+      <select id="sponsor"><option value="all">All sponsors</option></select>
+    </label>
+  </div>
+</div>
+
+<nav class="catnav" aria-label="Categories"><div class="wrap" id="catnav"></div></nav>
+
+<main><div class="wrap" id="main"></div><p class="empty" id="empty" hidden>No awards match these filters.</p></main>
+
+<footer>
+  <div class="wrap">
+    <div>Sources: <a href="https://provost.gatech.edu/faculty-awards" target="_blank" rel="noopener">Office of the Provost, Faculty Awards</a> and <a href="https://www.cc.gatech.edu/college-computing-annual-awards-and-honors" target="_blank" rel="noopener">College of Computing Annual Awards and Honors</a> (recent recipients and current College award names). Institute-level recipients are from the <a href="https://specialevents.gatech.edu/faculty-and-staff-honors" target="_blank" rel="noopener">2026 Faculty and Staff Honors Luncheon</a> program (April 24, 2026).</div>
+    <div>Some eligibility windows on the source page appear outdated. Confirm current criteria and deadlines on each award's website before nominating.</div>
+  </div>
+</footer>
+
+<script>
+const CATS = [
+  { id: "research", name: "Research", color: "#00537e", blurb: "Scholarly output, early-career discovery, research innovation and doctoral advising." },
+  { id: "teaching", name: "Teaching & Educational Innovation", color: "#b3a369", blurb: "Classroom excellence, curriculum and lab innovation, educational technology and professional education." },
+  { id: "mentoring", name: "Mentoring & Advising", color: "#5f8a3c", blurb: "Mentoring undergraduates in research, academic advising, and mentoring fellow faculty." },
+  { id: "service", name: "Service, Interdisciplinary & Distinguished Career", color: "#8a3c5f", blurb: "Service to the Institute and profession, cross-disciplinary contributions, and the Institute's highest faculty honor." },
+  { id: "outreach", name: "Outreach & Global Engagement", color: "#c7602b", blurb: "Partnerships and academic outreach with K-12 students and teachers, and international engagement." },
+  { id: "diversity", name: "Diversity & Inclusion", color: "#4a5fb8", blurb: "Advancing an inclusive campus culture and equity across the Institute." },
+  { id: "library", name: "Library", color: "#6b7280", blurb: "Recognition for Georgia Tech Library faculty and staff." }
+];
+
+const INST = "Institute Faculty & Staff Honors Luncheon";
+const FHC = "Office of the Provost – Faculty Honors Committee";
+const EVPR = "Office of the Executive Vice President for Research";
+const CTL = "Center for Teaching and Learning";
+const COC = "College of Computing";
+const COC_VENUE = "Annual College of Computing Awards Celebration";
+const COC_NOM = "Submit through the College's Qualtrics nomination form (text only, no uploads). State the exact award name, your contact information and the nominee's. Deadline: Friday, February 13, 2026.";
+const EVPR_NOM = "One nomination per individual per year; no limit per unit. All nominations are vetted and endorsed by the appropriate dean, IRI director or other executive.";
+const INFOREADY = "https://gatech.infoready4.com/#homePage";
+const COC_URL = "https://www.cc.gatech.edu/college-computing-annual-awards-and-honors";
+const COC_NOTE = "Not listed on the current College awards page.";
+const INST_NOTE = "Not presented at the 2026 Honors Luncheon.";
+const INST_URL = "https://specialevents.gatech.edu/faculty-and-staff-honors-awards";
+
+const AWARDS = [
+  // Research
+  { cat: "research", name: "Outstanding Achievement in Early Career Research", winners: [INST_NOTE], desc: "A faculty member within eight years of initial appointment who has made significant discoveries or advancements visibly impacting society or a scholarly community.", venue: INST, nom: EVPR_NOM, sponsor: EVPR, url: INFOREADY, tags: ["Early career"] },
+  { cat: "research", name: "Outstanding Faculty Research Author Award", winners: [INST_NOTE], desc: "Faculty who most contributed to highly impactful publications describing research conducted at Georgia Tech.", venue: INST, nom: EVPR_NOM, sponsor: EVPR, url: INFOREADY, tags: ["Publications"] },
+  { cat: "research", name: "Outstanding Achievement in Research Innovation Award", winners: ["2026 · Lakshmi “Prasad” Dasi (College of Engineering)"], desc: "Faculty whose research results have had a demonstrable and sustained societal impact.", venue: INST, nom: EVPR_NOM, sponsor: EVPR, url: INFOREADY, tags: ["Impact"] },
+  { cat: "research", name: "Outstanding Doctoral Thesis Advisor Award", desc: "Recognizes the achievements of a faculty member's doctoral students who completed all degree requirements in the award window.", venue: INST, nom: EVPR_NOM, sponsor: EVPR, url: INFOREADY, tags: ["Doctoral advising"],
+    winners: ["2026 · Shimeng Yu (College of Engineering)"] },
+  { cat: "research", name: "Outstanding Achievement in Research Enterprise Enhancement Award", desc: "Recognizes a faculty or research staff member whose work has strengthened Georgia Tech's research enterprise.", venue: INST, nom: EVPR_NOM, sponsor: EVPR, url: INFOREADY, tags: ["Research enterprise"],
+    winners: ["2026 · Anna Osterholm (College of Sciences)"] },
+  { cat: "research", name: "Outstanding Achievement in Research Engagement and Outreach Award", desc: "Recognizes research that engages external partners and communities beyond the campus.", venue: INST, nom: EVPR_NOM, sponsor: EVPR, url: INFOREADY, tags: ["Engagement"],
+    winners: ["2026 · Edward Botchwey (College of Engineering)"] },
+  { cat: "research", name: "Outstanding Achievement in Research Program Development Award", desc: "Team award for building a major new research program at Georgia Tech.", venue: INST, nom: EVPR_NOM, sponsor: EVPR, url: INFOREADY, tags: ["Team award"],
+    winners: ["2026 · Human Space Exploration Team, led by Thomas Orlando (College of Sciences)"] },
+  { cat: "research", name: "Outstanding Achievement in Research Program Impact Award", desc: "Team award for a research program with demonstrated large-scale impact.", venue: INST, nom: EVPR_NOM, sponsor: EVPR, url: INFOREADY, tags: ["Team award"],
+    winners: ["2026 · Georgia Artificial Intelligence in Manufacturing (AIM), led by Aaron Stebner (College of Engineering)"] },
+  { cat: "research", name: "Sigma Xi Best Faculty Paper Award", desc: "Recognizes an outstanding peer-reviewed paper by a Georgia Tech faculty member, awarded by the Georgia Tech chapter of Sigma Xi.", venue: INST, nom: "Nominate through the Georgia Tech Sigma Xi chapter's research awards page.", sponsor: "Georgia Tech Chapter of Sigma Xi", url: "https://sigmaxi.gatech.edu/georgia-tech-sigma-xi-research-awards/nomination-information/", tags: ["Publications"],
+    winners: ["2026 · Matt T. McDowell (College of Engineering)", "2026 · Jiang Zhigang (College of Sciences)"] },
+  { cat: "research", name: "Sigma Xi Young Faculty Award", desc: "Recognizes early-career faculty for outstanding research, awarded by the Georgia Tech chapter of Sigma Xi.", venue: INST, nom: "Nominate through the Georgia Tech Sigma Xi chapter's research awards page.", sponsor: "Georgia Tech Chapter of Sigma Xi", url: "https://sigmaxi.gatech.edu/georgia-tech-sigma-xi-research-awards/nomination-information/", tags: ["Early career"],
+    winners: ["2026 · Cong “Callie” Hao (College of Engineering)", "2026 · Omobolanle Ogunseiju (College of Design)"] },
+  { cat: "research", name: "Sigma Xi Sustained Research Award", desc: "Recognizes a sustained record of research excellence, awarded by the Georgia Tech chapter of Sigma Xi.", venue: INST, nom: "Nominate through the Georgia Tech Sigma Xi chapter's research awards page.", sponsor: "Georgia Tech Chapter of Sigma Xi", url: "https://sigmaxi.gatech.edu/georgia-tech-sigma-xi-research-awards/nomination-information/", tags: ["Career record"],
+    winners: ["2026 · Kostas T. Konstantinidis (College of Engineering)"] },
+  { cat: "research", name: "Outstanding Senior Faculty Research Award", desc: "A Full Professor who has made significant research contributions, judged on publication quality and research impact. Not more than once every four years per individual.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Full Professor"],
+    winners: ["2024 · Mark Riedl", "2023 · Moin Qureshi", "2022 · Richard Vuduc", "2021 · Alessandro Orso", "2020 · Le Song"] },
+  { cat: "research", name: "Outstanding Mid-Career Faculty Research Award", desc: "An Associate Professor who has made significant research contributions, judged on publication quality and research impact. Not more than once every four years per individual.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Associate Professor"],
+    winners: ["2023 · Andrea Parker", "2022 · Polo Chau, Munmun De Choudhury"] },
+  { cat: "research", name: "Outstanding Junior Faculty Research Award", desc: "An Assistant Professor who has made significant research contributions, judged on publication quality and research impact. Not more than once every four years per individual.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Assistant Professor"],
+    winners: ["2025 · Alexey Tumanov", "2024 · Chao Zhang", "2023 · Alexandros Daglis", "2022 · Srijan Kumar", "2021 · Diyi Yang"] },
+  { cat: "research", name: "Outstanding Research Scientist Award – Research", desc: "A Research Scientist who has made significant research contributions, judged on publication quality and research impact. Open to all research faculty; faculty and staff may nominate.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Research faculty"],
+    winners: ["2025 · Animesh Chhotaray, Rachel Baker", "2024 · Akihiro Hayashi", "2023 · Carrie Bruce", "2022 · Jeffrey Young", "2021 · Ketan Bhardwaj"] },
+  { cat: "research", name: "Outstanding Research Faculty Leadership Award", desc: "A Research Scientist with outstanding leadership contributions to the College, the Institute or the computing community: collaborative research programs, outreach, campus initiatives, or service to the profession. Listed on the Provost page as the Outstanding Research Faculty Award.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Research faculty", "Leadership"],
+    winners: ["2025 · Ketan Bhardwaj", "2024 · Sterling Peet", "2023 · Carrie Bruce", "2022 · Jeffrey Young"] },
+  { cat: "research", name: "Outstanding Post-Doctoral Research Award", desc: "A postdoctoral researcher nominated by faculty for outstanding research, judged on publication quality and research impact.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Postdoc"],
+    winners: ["2025 · Seonjin Na", "2024 · Saad Ahmed", "2023 · Daniel Gibney", "2021 · Christopher Marcotte"] },
+  { cat: "research", name: "The Edenfield Faculty Fellowship Award", desc: "Faculty who have made particular strides in their research area; the fellowship strengthens the recipient's scholarly activities in the College of Computing.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Fellowship"], winners: [COC_NOTE] },
+  { cat: "research", name: "The James D. Lester III Endowment Award", desc: "Established by Faye R. and James D. Lester III for a faculty member whose significant, innovative contributions in Internet phenomena (animation, gaming, email, music, video, television, film and more) have brought widespread recognition. Selected at the discretion of the Dean.", venue: COC_VENUE, nom: "Dean's Office award: selected by the Dean or designee rather than by open nomination.", sponsor: COC, url: COC_URL, tags: ["Internet research", "Dean's Office"], winners: [COC_NOTE] },
+
+  // Teaching
+  { cat: "teaching", name: "Class of 1940 W. Howard Ector Outstanding Teacher Award", winners: ["2026 · Pamela Pollet (College of Sciences)"], desc: "Teaching excellence: extraordinary effort, inspiration transmitted to students, direct impact and involvement with students, intellectual integrity, and impact on post-graduate success.", venue: INST, nom: "Packet (max 20 pages): letter of nomination, condensed CV, and letters of recommendation.", sponsor: FHC, url: INFOREADY, tags: ["Teaching excellence"] },
+  { cat: "teaching", name: "Class of 1940 W. Roane Beard Outstanding Teacher Award", winners: ["2026 · Ellen Yi Chen Mazumdar (College of Engineering)"], desc: "Teaching excellence: extraordinary effort, inspiration transmitted to students, direct impact and involvement with students, intellectual integrity, and impact on post-graduate success.", venue: INST, nom: "Packet (max 20 pages): letter of nomination, condensed CV, and letters of recommendation.", sponsor: FHC, url: INFOREADY, tags: ["Teaching excellence"] },
+  { cat: "teaching", name: "Class of 1934 Outstanding Innovative Use of Education Technology Award", winners: ["2026 · Rodrigo Borela Valente, Nimisha Roy (College of Computing)"], desc: "A faculty member who has developed and instituted innovative techniques to improve the learning environment and learning process.", venue: INST, nom: "Packet (max 20 pages): letter of nomination, condensed CV, and letters of recommendation.", sponsor: FHC, url: INFOREADY, tags: ["Ed tech"] },
+  { cat: "teaching", name: "Outstanding Lifetime Learning Award", winners: ["2026 · Joel Sokol (College of Engineering)"], desc: "A faculty member or researcher recognized for contribution to professional and lifetime learning education at Georgia Tech. Listed on the Provost page as the Outstanding Professional Education Award.", venue: INST, nom: "Packet (max 20 pages): letter of nomination, condensed CV, and letters of recommendation.", sponsor: FHC, url: INFOREADY, tags: ["Professional education"] },
+  { cat: "teaching", name: "CTL/BP Junior Faculty Teaching Excellence Award", winners: ["2026 · Ebenezer Fanijo (College of Design)", "2026 · Lily Turaski (College of Engineering)"], desc: "Teaching excellence, educational innovation, impact on student lives, and research–teaching connections. Full-time tenure-track faculty who have not yet received tenure.", venue: INST, nom: "Packet (max 15 pages): letter of nomination, reflective statement, illustrations of teaching and impact on student learning, letters of support.", sponsor: CTL, url: INFOREADY, tags: ["Pre-tenure"] },
+  { cat: "teaching", name: "Geoffrey G. Eichholz Faculty Teaching Award", winners: ["Not on the current CTL award list."], desc: "Outstanding teaching to students in core courses.", venue: INST, nom: "Packet (max 15 pages): letter of nomination, reflective statement, illustrations of teaching and impact on student learning, letters of support.", sponsor: CTL, url: INFOREADY, tags: ["Core courses"] },
+  { cat: "teaching", name: "Undergraduate Educator Award", winners: ["2026 · Tiffiny Hughes-Troutman (College of Sciences)"], desc: "Outstanding contributions to undergraduate education. Non-tenure-track faculty with a 75–100% appointment who teach undergraduate courses and have completed at least two semesters.", venue: INST, nom: "Packet (max 15 pages): letter of nomination, table of contents, reflective statement, illustrations of teaching and impact, letters of support.", sponsor: CTL, url: INFOREADY, tags: ["Non-tenure-track"] },
+  { cat: "teaching", name: "Curriculum Innovation Award", winners: ["2026 · Mary Peek (College of Sciences)"], desc: "Faculty improving the quality of education through pedagogical and curricular innovation. Open to full-time general faculty of any rank, or a team.", venue: INST, nom: "Packet (max 15 pages): table of contents, descriptions of the innovation, and multiple letters of support.", sponsor: CTL, url: INFOREADY, tags: ["Any rank", "Teams eligible"] },
+  { cat: "teaching", name: "Innovation and Excellence in Laboratory Instruction Award", winners: [INST_NOTE], desc: "Faculty who have excelled in teaching in the laboratory. Open to full-time general faculty of any rank.", venue: INST, nom: "Packet (max 15 pages): table of contents, descriptions of the laboratory innovation, and multiple letters of support.", sponsor: CTL, url: INFOREADY, tags: ["Lab instruction"] },
+  { cat: "teaching", name: "Innovation in Co-Curricular Education Award", desc: "Increasing student learning outside the traditional curriculum and helping graduate global citizens. Open to full-time general faculty of any rank.", venue: INST, nom: "Packet (max 15 pages): table of contents, descriptions of the co-curricular initiative, and multiple letters of support.", sponsor: CTL, url: INFOREADY, tags: ["Co-curricular"],
+    winners: ["2026 · Zerrin Ondin-Fraser (College of Design)"] },
+  { cat: "teaching", name: "Scholarship of Teaching and Learning Award", desc: "Recognizes faculty whose scholarly inquiry into teaching and learning advances educational practice.", venue: INST, nom: "See the Center for Teaching and Learning awards page for the current packet requirements.", sponsor: CTL, url: INST_URL, tags: ["SoTL"],
+    winners: ["2026 · Kyoko Masuda (Ivan Allen College of Liberal Arts)"] },
+  { cat: "teaching", name: "Teaching Excellence Award for Online Teaching", desc: "Recognizes excellence in designing and teaching online courses.", venue: INST, nom: "See the Center for Teaching and Learning awards page for the current packet requirements.", sponsor: CTL, url: INST_URL, tags: ["Online teaching"],
+    winners: ["2026 · Danielle Geary (Ivan Allen College of Liberal Arts)"] },
+  { cat: "teaching", name: "Outstanding Junior Faculty Teaching Award", desc: "An Assistant Professor who, on arrival, has made significant, high-quality and innovative contributions to instruction: student-recognized effectiveness, student-centered learning, or new and updated courses. Must have taught at least two courses (six credits, one undergraduate) in the previous calendar year. Listed on the Provost page as the Lockheed Excellence in Teaching Award.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Assistant Professor"],
+    winners: ["2025 · Frank Li", "2024 · Alexey Tumanov", "2023 · Alexandros Daglis", "2022 · Xu Chu, Jennifer Kim"] },
+  { cat: "teaching", name: "The William A. “gus” Baird Faculty Teaching Award", desc: "Faculty of any rank with significant, high-quality and innovative contributions to instruction, and a love of teaching and way with students that goes beyond technique, as gus Baird's did. Must have taught at least two courses (six credits, one undergraduate) in the previous calendar year. Not more than once every four years.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Any rank"],
+    winners: ["2025 · Max Roozbahani", "2024 · Gregory Turk", "2023 · Shashank Varma", "2022 · Neha Kumar", "2021 · Richard Peng"] },
+  { cat: "teaching", name: "The William D. “Bill” Leahy Jr. Outstanding Instructor Award", desc: "A non-tenure-track lecturer with significant, high-quality and innovative contributions to instruction: uniqueness and enthusiasm in teaching, thorough subject knowledge, excellent communication, and responsiveness and accessibility to students. Listed on the Provost page as Outstanding Instructor.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Lecturer"],
+    winners: ["2025 · Nimisha Roy", "2024 · Rodrigo Borela Valente", "2023 · Ronnie Howard", "2022 · Aibek Musaev, Caleb Southern", "2021 · Gerandy Brito, Olufisayo Omojokun"] },
+  { cat: "teaching", name: "The Monica Sweat Outstanding Lecturer in External Engagement Award", desc: "A non-tenure-track lecturer whose teaching excellence and contributions to the computing community (publications, presentations, interviews on teaching, service or research) raise the reputation of the College and the Division of Computing Instruction in CS education.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Lecturer", "External engagement"],
+    winners: ["2025 · Pedro Feijoo Garcia", "2024 · Melinda McDaniel", "2023 · Olufisayo Omojokun", "2022 · Mary Hudachek-Buswell"] },
+  { cat: "teaching", name: "The Lockheed Inspirational Young Faculty Award", desc: "Inspirational untenured professors and mentors whose contributions inspire, recruit, develop and uplift students to excel.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Pre-tenure"], winners: [COC_NOTE] },
+
+  // Mentoring & advising
+  { cat: "mentoring", name: "Outstanding Undergraduate Research Mentor Awards", winners: ["2026 · Farzaneh Najafi, junior (College of Sciences)", "2026 · Brian Gunter, senior (College of Engineering)"], desc: "Sustained outstanding achievement in mentoring undergraduates in research. One junior and one senior member of the general faculty.", venue: INST, nom: "Packet (max 20 pages): letter of nomination, condensed CV, evidence of teaching effectiveness, and letters of recommendation including past and present students.", sponsor: FHC, url: INFOREADY, tags: ["Junior + Senior"] },
+  { cat: "mentoring", name: "Outstanding Undergraduate Academic Advising Award – Faculty", winners: ["2026 · Haley Steele (College of Sciences)"], desc: "A faculty member with significant responsibilities in advising undergraduates alongside teaching and/or research.", venue: INST, nom: "Cover letter, letter from nominator, letter from supervisor, and letters from students.", sponsor: "Office of the Vice Provost for Undergraduate Education", url: "http://advising.gatech.edu/2018-undergraduate-advising-awards", tags: ["Advising"] },
+  { cat: "mentoring", name: "Outstanding Faculty Mentoring Award", desc: "A tenure-track faculty member who consistently models excellent mentoring, judged by impact on mentored faculty's teaching, research and service. Tenure-track faculty nominate. Listed on the Provost page as the Faculty Mentor Award.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Faculty-to-faculty"],
+    winners: ["2024 · Thad Starner", "2023 · Ellen Zegura", "2021 · Vivek Sarkar"] },
+
+  // Service / interdisciplinary / career
+  { cat: "service", name: "Class of 1934 Distinguished Professor Award", winners: ["2026 · Mark Prausnitz (College of Engineering)"], desc: "Sustained outstanding achievement in teaching, research and service. The highest award given to a Georgia Tech faculty member.", venue: INST, nom: "Packet (max 20 pages): nomination letter from the Chair, letters from peers, documentation of scholarship, and letters on impact to students.", sponsor: FHC, url: INFOREADY, tags: ["Highest honor"] },
+  { cat: "service", name: "Class of 1934 Outstanding Service Award", winners: ["2026 · Dima Nazzal (College of Engineering)"], desc: "A faculty member who has benefited the Institute, profession, school or department, or the general public in an exemplary manner.", venue: INST, nom: "Packet (max 20 pages): letter of nomination, condensed CV, and letters of recommendation.", sponsor: FHC, url: INFOREADY, tags: ["Service"] },
+  { cat: "service", name: "Class of 1934 Outstanding Interdisciplinary Activities Award", desc: "Faculty who have made significant interdisciplinary contributions to teaching and research.", venue: INST, nom: "Packet (max 20 pages): letter of nomination, condensed CV, and letters of recommendation.", sponsor: FHC, url: INFOREADY, tags: ["Interdisciplinary"],
+    winners: ["2026 · Jennifer Singh (Ivan Allen College of Liberal Arts)"] },
+  { cat: "service", name: "Outstanding Faculty ANAK Award", desc: "Presented by the ANAK Society, Georgia Tech's oldest honor society, to a faculty member for exceptional contributions to the Institute and its students.", venue: INST, nom: "See the ANAK Society award page for nomination details.", sponsor: "ANAK Society", url: "https://anak.gtorg.gatech.edu/anak-award", tags: ["Student-nominated honor"],
+    winners: ["2026 · Rebecca Watts Hull (Center for Teaching and Learning)"] },
+  { cat: "service", name: "Outstanding Faculty Leadership Award", desc: "A faculty member with an outstanding record of leadership that has significantly benefited the College, the Institute or the computing community: student education or curriculum, outreach, campus initiatives, or service to the profession. Must have taught at least two courses (six credits, one undergraduate) in the previous calendar year. Not more than once every four years.", venue: COC_VENUE, nom: COC_NOM, sponsor: COC, url: COC_URL, tags: ["Leadership"],
+    winners: ["2025 · Neha Kumar", "2024 · Elizabeth DiSalvo", "2023 · Srinivas Aluru", "2022 · David Joyner, Haesun Park"] },
+  { cat: "service", name: "Dean's Award", desc: "One or more awards to faculty, staff or groups showing exceptional performance aligned with the College's strategic focus, or who have improved the College's operations and reputation. Selected by the Dean.", venue: COC_VENUE, nom: "Dean's Office award: selected by the Dean rather than by open nomination.", sponsor: COC, url: COC_URL, tags: ["Dean's Office", "Faculty, staff, groups"], winners: [COC_NOTE] },
+  { cat: "service", name: "Petit Institute “Above and Beyond” Award", desc: "Interdisciplinary Research and Educational award for team-based individuals who show exemplary service to the institute and contribute to its collaborative environment.", venue: "Petit Institute Holiday Party", nom: "Not specified on the source page.", sponsor: "Parker H. Petit Institute for Bioengineering and Bioscience", url: "https://petitinstitute.gatech.edu/awards", tags: ["Team-based"] },
+
+  // Outreach
+  { cat: "outreach", name: "Education Partnership Award", winners: [INST_NOTE], desc: "Genuine, substantial partnerships between Georgia Tech faculty and students and the K-12 community. Requires a full-time faculty member, a Tech student, and a K-12 educator.", venue: INST, nom: "Cover sheet, statement of partnership, constituent statements, and letters of support.", sponsor: CTL, url: INFOREADY, tags: ["K-12 partnership"] },
+  { cat: "outreach", name: "Faculty Award for Academic Outreach", desc: "Faculty who use their academic expertise to further the learning of K-12 students, teachers, or other educational stakeholders in Georgia.", venue: INST, nom: "Packet (max 12 pages): letter of nomination, table of contents, description of outreach activities, and multiple letters of support.", sponsor: CTL, url: INFOREADY, tags: ["K-12 outreach"],
+    winners: ["2026 · Shalu Suri (College of Engineering)"] },
+  { cat: "outreach", name: "Denning Faculty Award for Global Engagement", desc: "Recognizes a faculty member whose work advances Georgia Tech's international engagement and global reach.", venue: INST, nom: "Nominate through the Steven A. Denning Awards page.", sponsor: "Office of International Initiatives", url: "https://global.gatech.edu/steven-a-denning-awards/", tags: ["Global engagement"],
+    winners: ["2026 · Stéphanie Boulard (Ivan Allen College of Liberal Arts)"] },
+
+  // Diversity
+  { cat: "diversity", name: "Lettie Pate Whitehead Evans Equity Award", desc: "A faculty or staff member who has led transformative, Institute-wide or unit-level efforts with tangible impact on opportunities and experiences for women in the Georgia Tech community.", venue: INST, nom: "Nomination should show the candidate's transformative efforts for women at Georgia Tech, their scope, and their tangible impact.", sponsor: "Georgia Tech (Institute-wide)", url: INST_URL, tags: ["Women at Georgia Tech"],
+    winners: ["2026 · Susan Lozier (College of Sciences)"] },
+  { cat: "diversity", name: "Faces of Inclusive Excellence", desc: "A diverse group of faculty, staff and students committed to advancing a culture of inclusive excellence at Georgia Tech.", venue: "Diversity Symposium Awards Luncheon", nom: "Not specified on the source page.", sponsor: "Institute Diversity", url: "http://diversity.gatech.edu/facesofinclusiveexcellence", tags: ["Faculty, staff, students"] },
+  { cat: "diversity", name: "The Dean's Access and Advancement Award", desc: "Staff, faculty or students with outstanding contributions to the College of Computing community in diversity, equity and inclusion, through committee or strategic work or individual impact. Selected by the Dean.", venue: COC_VENUE, nom: "Dean's Office award: selected by the Dean rather than by open nomination.", sponsor: COC, url: COC_URL, tags: ["Dean's Office"], winners: [COC_NOTE] },
+  { cat: "diversity", name: "Diversity Champions Award", desc: "Campus community members who advance equity at the Institute, particularly at the intersections of race and class.", venue: "Diversity Symposium Awards Luncheon", nom: "Not specified on the source page.", sponsor: "Institute Diversity", url: "http://diversity.gatech.edu/diversitychampionawards", tags: ["Equity"] },
+
+  // Library
+  { cat: "library", name: "Frances Kaiser Award", desc: "A Georgia Tech Library faculty member with significant professional achievement in library and information science that contributes to the Institute.", venue: "Georgia Tech Library Employee Appreciation Event", nom: "Signed letter of support, current vita, and samples of published materials.", sponsor: "Georgia Tech Library", url: "http://library.gatech.edu/about/award_forms/kaiser/", tags: ["Library faculty"] },
+  { cat: "library", name: "Employee of the Quarter", desc: "Honors an employee for living out the mission, vision and expected behaviors of the Library.", venue: "Open Forum quarterly all-staff meeting", nom: "Nomination describing the nominee and how they live out the Library's mission.", sponsor: "Georgia Tech Library", url: "https://forms.library.gatech.edu/node/31", tags: ["Staff"] }
+];
+
+const byId = Object.fromEntries(CATS.map(c => [c.id, c]));
+const isInst = a => a.venue === INST;
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+// Stats
+const instCount = AWARDS.filter(isInst).length;
+document.getElementById("stats").innerHTML =
+  `<span><b>${AWARDS.length}</b>awards</span><span><b>${CATS.length}</b>categories</span><span><b>${instCount}</b>Institute-level</span><span><b>${AWARDS.length - instCount}</b>college &amp; unit</span>`;
+
+// Sponsor select
+const sponsors = [...new Set(AWARDS.map(a => a.sponsor))].sort();
+const sel = document.getElementById("sponsor");
+sponsors.forEach(s => { const o = document.createElement("option"); o.value = s; o.textContent = s; sel.appendChild(o); });
+
+// Category nav + sections
+const nav = document.getElementById("catnav");
+const main = document.getElementById("main");
+CATS.forEach(c => {
+  const n = AWARDS.filter(a => a.cat === c.id).length;
+  nav.insertAdjacentHTML("beforeend", `<a href="#${c.id}" style="--c:${c.color}"><span class="dot"></span>${esc(c.name)} <span class="n" style="opacity:.6">${n}</span></a>`);
+  const cards = AWARDS.filter(a => a.cat === c.id).map(a => `
+    <article class="card" style="--c:${c.color}" data-cat="${c.id}" data-level="${isInst(a) ? "institute" : "unit"}" data-sponsor="${esc(a.sponsor)}"
+      data-text="${esc((a.name + " " + a.desc + " " + a.sponsor + " " + a.venue + " " + a.tags.join(" ")).toLowerCase())}">
+      <div class="body">
+        <div class="tags">
+          <span class="tag ${isInst(a) ? "inst" : ""}">${isInst(a) ? "Institute-level" : "College / Unit"}</span>
+          ${a.tags.map(t => `<span class="tag">${esc(t)}</span>`).join("")}
+        </div>
+        <h3>${esc(a.name)}</h3>
+        <p class="desc">${esc(a.desc)}</p>
+        <dl class="meta">
+          <div><dt>Presented at</dt><dd>${esc(a.venue)}</dd></div>
+          <div><dt>Nomination</dt><dd>${esc(a.nom)}</dd></div>
+          ${a.winners ? `<div><dt>Recent recipients</dt><dd><ul class="winners">${a.winners.map(w => {
+            const m = w.match(/^(\d{4}) · (.+)$/);
+            return m ? `<li><span class="yr">${m[1]}</span>${esc(m[2])}</li>` : `<li class="note">${esc(w)}</li>`;
+          }).join("")}</ul></dd></div>` : ""}
+        </dl>
+      </div>
+      <div class="foot">
+        <span class="sponsor">${esc(a.sponsor)}</span>
+        <a class="btn" href="${esc(a.url)}" target="_blank" rel="noopener">Details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+      </div>
+    </article>`).join("");
+  main.insertAdjacentHTML("beforeend", `
+    <section class="cat" id="${c.id}" style="--c:${c.color}">
+      <div class="cat-head"><div class="bar"></div><div>
+        <h2>${esc(c.name)} <span class="count" data-count></span></h2>
+        <p>${esc(c.blurb)}</p>
+      </div></div>
+      <div class="grid">${cards}</div>
+    </section>`);
+});
+
+// Filtering
+const state = { q: "", level: "all", sponsor: "all" };
+function apply() {
+  let total = 0;
+  document.querySelectorAll("section.cat").forEach(sec => {
+    let n = 0;
+    sec.querySelectorAll(".card").forEach(card => {
+      const ok = (state.level === "all" || card.dataset.level === state.level)
+        && (state.sponsor === "all" || card.dataset.sponsor === state.sponsor)        && (!state.q || card.dataset.text.includes(state.q));
+      card.hidden = !ok; if (ok) n++;
+    });
+    sec.hidden = n === 0; total += n;
+    sec.querySelector("[data-count]").textContent = `${n} award${n === 1 ? "" : "s"}`;
+  });
+  document.getElementById("empty").hidden = total > 0;
+}
+document.getElementById("q").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); apply(); });
+sel.addEventListener("change", e => { state.sponsor = e.target.value; apply(); });
+document.querySelectorAll("#levelChips .chip").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll("#levelChips .chip").forEach(x => x.setAttribute("aria-pressed", "false"));
+  b.setAttribute("aria-pressed", "true"); state.level = b.dataset.level; apply();
+}));apply();
+</script>
+</body>
+</html>
