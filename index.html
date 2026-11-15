@@ -150,8 +150,20 @@ section.cat[hidden] { display: none; }
 .empty { text-align: center; color: var(--muted); padding: 60px 0; font-size: 15px; }
 .empty[hidden] { display: none; }
 
-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
-footer .wrap { padding-block: 22px 40px; display: grid; gap: 6px; }
+.sources { border-top: 1px solid var(--line); background: var(--surface); }
+.sources .wrap { padding-block: 36px 48px; display: grid; gap: 14px; }
+.sources h2 { font-size: 24px; font-weight: 600; }
+.sources-lede { margin: 0; color: var(--muted); max-width: 70ch; }
+.src-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.src-list li { border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; display: grid; gap: 6px; background: var(--bg); min-width: 0; }
+.src-list .src-n { font-family: var(--font-display); font-size: 30px; font-weight: 600; color: var(--gold-ink); line-height: 1; font-variant-numeric: tabular-nums; }
+.src-list .src-n small { font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--muted); margin-left: 6px; }
+.src-list a { font-weight: 600; text-decoration: none; }
+.src-list a:hover { text-decoration: underline; }
+.src-list p { margin: 0; font-size: 13px; color: var(--muted); }
+.sources-note { margin: 0; font-size: 13px; color: var(--muted); max-width: 80ch; }
+.meta a.src { color: var(--accent); text-decoration: none; }
+.meta a.src:hover { text-decoration: underline; }
 
 @media (max-width: 640px) {
   .meta div { grid-template-columns: 1fr; gap: 2px; }
@@ -194,12 +206,14 @@ footer .wrap { padding-block: 22px 40px; display: grid; gap: 6px; }
 
 <main><div class="wrap" id="main"></div><p class="empty" id="empty" hidden>No awards match these filters.</p></main>
 
-<footer>
+<section class="sources" id="sources" aria-labelledby="sources-h">
   <div class="wrap">
-    <div>Sources: <a href="https://provost.gatech.edu/faculty-awards" target="_blank" rel="noopener">Office of the Provost, Faculty Awards</a> and <a href="https://www.cc.gatech.edu/college-computing-annual-awards-and-honors" target="_blank" rel="noopener">College of Computing Annual Awards and Honors</a> (recent recipients and current College award names). Institute-level recipients are from the <a href="https://specialevents.gatech.edu/faculty-and-staff-honors" target="_blank" rel="noopener">2026 Faculty and Staff Honors Luncheon</a> program (April 24, 2026).</div>
-    <div>Some eligibility windows on the source page appear outdated. Confirm current criteria and deadlines on each award's website before nominating.</div>
+    <h2 id="sources-h">Sources</h2>
+    <p class="sources-lede">Where the awards and recipient names on this page come from. Each card also names its source.</p>
+    <ol class="src-list" id="srcList"></ol>
+    <p class="sources-note">Some eligibility windows on the Provost page appear outdated. Confirm current criteria and deadlines on each award's website before nominating. Last compiled November 15, 2026.</p>
   </div>
-</footer>
+</section>
 
 <script>
 const CATS = [
@@ -326,6 +340,38 @@ const AWARDS = [
 ];
 
 const byId = Object.fromEntries(CATS.map(c => [c.id, c]));
+
+// Where each award entry comes from. Everything not listed below is from the Provost page.
+const SOURCES = {
+  provost: { short: "Provost faculty awards page", label: "Office of the Provost – Faculty Awards", url: "https://provost.gatech.edu/faculty-awards" },
+  coc: { short: "College of Computing awards page", label: "College of Computing – Annual Awards and Honors", url: COC_URL },
+  fshl: { short: "Faculty & Staff Honors Awards page", label: "Special Events – Faculty and Staff Honors Awards and the 2026 Luncheon program", url: INST_URL }
+};
+const FROM_COC = new Set([
+  "Outstanding Mid-Career Faculty Research Award",
+  "The William A. “gus” Baird Faculty Teaching Award",
+  "The Monica Sweat Outstanding Lecturer in External Engagement Award",
+  "Outstanding Faculty Leadership Award",
+  "Dean's Award",
+  "The Dean's Access and Advancement Award"
+]);
+const FROM_FSHL = new Set([
+  "Outstanding Achievement in Research Enterprise Enhancement Award",
+  "Outstanding Achievement in Research Engagement and Outreach Award",
+  "Outstanding Achievement in Research Program Development Award",
+  "Outstanding Achievement in Research Program Impact Award",
+  "Sigma Xi Best Faculty Paper Award",
+  "Sigma Xi Young Faculty Award",
+  "Sigma Xi Sustained Research Award",
+  "Scholarship of Teaching and Learning Award",
+  "Teaching Excellence Award for Online Teaching",
+  "Outstanding Faculty ANAK Award",
+  "Denning Faculty Award for Global Engagement",
+  "Lettie Pate Whitehead Evans Equity Award"
+]);
+const srcOf = a => FROM_COC.has(a.name) ? "coc" : FROM_FSHL.has(a.name) ? "fshl" : "provost";
+const hasNames = a => (a.winners || []).some(w => /^\d{4} · /.test(w));
+const winnerSrcOf = a => !hasNames(a) ? null : a.sponsor === COC ? "coc" : "fshl";
 const isInst = a => a.venue === INST;
 const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
@@ -362,6 +408,7 @@ CATS.forEach(c => {
             const m = w.match(/^(\d{4}) · (.+)$/);
             return m ? `<li><span class="yr">${m[1]}</span>${esc(m[2])}</li>` : `<li class="note">${esc(w)}</li>`;
           }).join("")}</ul></dd></div>` : ""}
+          <div><dt>Source</dt><dd><a class="src" href="${SOURCES[srcOf(a)].url}" target="_blank" rel="noopener">${esc(SOURCES[srcOf(a)].short)}</a>${winnerSrcOf(a) && winnerSrcOf(a) !== srcOf(a) ? `; recipients from <a class="src" href="${SOURCES[winnerSrcOf(a)].url}" target="_blank" rel="noopener">${esc(SOURCES[winnerSrcOf(a)].short)}</a>` : ""}</dd></div>
         </dl>
       </div>
       <div class="foot">
@@ -378,6 +425,23 @@ CATS.forEach(c => {
       <div class="grid">${cards}</div>
     </section>`);
 });
+
+// Sources summary
+const nProv = AWARDS.filter(a => srcOf(a) === "provost").length;
+const nCoc = AWARDS.filter(a => srcOf(a) === "coc").length;
+const nFshl = AWARDS.filter(a => srcOf(a) === "fshl").length;
+const nCocWinners = AWARDS.filter(a => winnerSrcOf(a) === "coc").length;
+const nFshlWinners = AWARDS.filter(a => winnerSrcOf(a) === "fshl").length;
+document.getElementById("srcList").innerHTML = `
+  <li><span class="src-n">${nProv}<small>of ${AWARDS.length} awards</small></span>
+    <a href="${SOURCES.provost.url}" target="_blank" rel="noopener">${esc(SOURCES.provost.label)}</a>
+    <p>The base list: every award in the Provost's faculty awards table, with eligibility, venue, nomination packet and sponsor. Where a College of Computing award has since been renamed, the card uses the current name and notes the Provost listing.</p></li>
+  <li><span class="src-n">${nCoc}<small>added awards</small></span>
+    <a href="${SOURCES.coc.url}" target="_blank" rel="noopener">${esc(SOURCES.coc.label)}</a>
+    <p>College awards not on the Provost page, plus current award names, eligibility, the nomination form and deadline, and recent recipients (2020–2025) for ${nCocWinners} College of Computing awards.</p></li>
+  <li><span class="src-n">${nFshl}<small>added awards</small></span>
+    <a href="${SOURCES.fshl.url}" target="_blank" rel="noopener">${esc(SOURCES.fshl.label)}</a>
+    <p>Institute awards on the current Honors Luncheon list that the Provost page omits, plus 2026 recipients for ${nFshlWinners} Institute-level awards, taken from the April 24, 2026 luncheon program.</p></li>`;
 
 // Filtering
 const state = { q: "", level: "all", sponsor: "all" };
